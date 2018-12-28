@@ -5,7 +5,7 @@
     <PackAsTool>True</PackAsTool>
     <OutputType>Exe</OutputType>
 
-    <ToolCommandName>dotnet-guid</ToolCommandName>
+    <ToolCommandName>guid</ToolCommandName>
 
     <PackageId>dotnet-guid</PackageId>
     <PackageVersion>0.5.0</PackageVersion>
