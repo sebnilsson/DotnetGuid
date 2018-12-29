@@ -5,6 +5,8 @@ using McMaster.Extensions.CommandLineUtils;
 
 namespace DotnetGuid
 {
+    [Command(Name = "guid", Description = "Creates GUIDs/UUIDs.")]
+    [HelpOption]
     public class GuidApp
     {
         [Argument(order: 0, Description = DescriptionTexts.Count)]

@@ -18,7 +18,7 @@ dotnet tool install -g dotnet-guid
 ## Usage
 
 ```
-Usage: dotnet guid [arguments] [options]
+Usage: guid [arguments] [options]
 
 Arguments:
   Count         Defines how may GUIDs/UUIDs to generate. Defaults to 1.
