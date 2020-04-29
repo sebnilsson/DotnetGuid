@@ -9,27 +9,15 @@ namespace DotnetGuid
             if (app == null)
                 throw new ArgumentNullException(nameof(app));
 
-            if (app.Format32Digits)
+            return app switch
             {
-                return "N";
-            }
-            if (app.Format32DigitsHyphens)
-            {
-                return "D";
-            }
-            if (app.Format32DigitsHyphensBraces)
-            {
-                return "B";
-            }
-            if (app.Format32DigitsHyphensParentheses)
-            {
-                return "P";
-            }
-            if (app.FormatHexadecimal)
-            {
-                return "X";
-            }
-            return null;
+                { Format32Digits: true } => "N",
+                { Format32DigitsHyphens: true } => "D",
+                { Format32DigitsHyphensBraces: true } => "B",
+                { Format32DigitsHyphensParentheses: true } => "P",
+                { FormatHexadecimal: true } => "X",
+                _ => string.Empty
+            };
         }
     }
 }
