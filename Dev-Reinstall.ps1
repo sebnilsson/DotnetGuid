@@ -1,5 +1,9 @@
+$csproj = 'src/DotnetGuid/DotnetGuid.csproj'
+
 dotnet tool uninstall -g dotnet-guid
 
-dotnet pack 'src/DotnetGuid/DotnetGuid.csproj' --output ./
+dotnet pack $csproj --output ./nupkg
 
-dotnet tool install -g dotnet-guid --add-source 'src/DotnetGuid/'
+$version = ([Xml] (Get-Content $csproj)).Project.PropertyGroup.Version
+
+dotnet tool install -g dotnet-guid --add-source 'nupkg/' --version $version

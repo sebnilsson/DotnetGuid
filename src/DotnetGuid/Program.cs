@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 using McMaster.Extensions.CommandLineUtils;
 
@@ -14,7 +14,7 @@ namespace DotnetGuid
         }
 
         private static void OnCancelKeyPress(
-            object sender,
+            object? sender,
             ConsoleCancelEventArgs e)
         {
             Console.ResetColor();
