@@ -7,8 +7,8 @@ which can be formatted in multiple ways.
 
 ## Installation
 
-Download the [.NET Core SDK 2.1](https://aka.ms/DotNetCore21) or later.
-The install the [`dotnet-guid`](https://www.nuget.org/packages/dotnet-guid)
+Download the [latest version of .NET](https://dot.net).
+Then install the [`dotnet-guid`](https://www.nuget.org/packages/dotnet-guid)
 .NET Global Tool, using the command-line:
 
 ```
