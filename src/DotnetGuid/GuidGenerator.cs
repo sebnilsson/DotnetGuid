@@ -5,13 +5,13 @@ namespace DotnetGuid
 {
     public class GuidGenerator
     {
-        private static readonly Func<Guid> GuidFactory = () => Guid.NewGuid();
+        private static readonly Func<Guid> s_newGuidFactory = () => Guid.NewGuid();
 
-        private static readonly Func<Guid> EmptyGuidFactory = () => Guid.Empty;
+        private static readonly Func<Guid> s_emptyGuidFactory = () => Guid.Empty;
 
         private readonly GuidApp _app;
 
-        private readonly Func<Guid> _factory;
+        private readonly Func<Guid> _guidFactory;
 
         private readonly string _format;
 
@@ -19,13 +19,13 @@ namespace DotnetGuid
         {
             _app = app ?? throw new ArgumentNullException(nameof(app));
 
-            _factory = !app.Empty ? GuidFactory : EmptyGuidFactory;
+            _guidFactory = !app.Empty ? s_newGuidFactory : s_emptyGuidFactory;
             _format = GuidFormatResolver.GetFormat(app);
         }
 
         public IEnumerable<string> GenerateGuids()
         {
-            for (int i = 0; i < _app.Count; i++)
+            for (var i = 0; i < _app.Count; i++)
             {
                 yield return GenerateGuid();
             }
@@ -33,7 +33,7 @@ namespace DotnetGuid
 
         private string GenerateGuid()
         {
-            var guid = _factory();
+            var guid = _guidFactory();
 
             var result = guid.ToString(_format);
 
