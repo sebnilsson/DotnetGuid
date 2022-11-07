@@ -1,17 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <LangVersion>latest</LangVersion>
     <Nullable>Enable</Nullable>
+    <RollForward>LatestMajor</RollForward>
 
-    <PackageId>dotnet-guid</PackageId>
-    <PackageVersion>0.6.0</PackageVersion>
-    <Version>0.6.0</Version>
-
-    <ToolCommandName>guid</ToolCommandName>
     <AssemblyName>guid</AssemblyName>
+    <PackageId>dotnet-guid</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Version>1.0.0</Version>
+
+    <ToolCommandName>dotnet-guid</ToolCommandName>
     <PackAsTool>True</PackAsTool>
     <PackageOutputPath>./nupkg</PackageOutputPath>
 

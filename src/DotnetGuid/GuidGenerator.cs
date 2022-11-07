@@ -13,33 +13,54 @@ namespace DotnetGuid
 
         private readonly Func<Guid> _guidFactory;
 
-        private readonly string _format;
+        private readonly GuidFormatter _guidFormatter;
 
         public GuidGenerator(GuidApp app)
         {
             _app = app ?? throw new ArgumentNullException(nameof(app));
 
             _guidFactory = !app.Empty ? s_newGuidFactory : s_emptyGuidFactory;
-            _format = GuidFormatResolver.GetFormat(app);
+            _guidFormatter = GuidFormatterResolver.GetFormatter(app);
         }
 
         public IEnumerable<string> GenerateGuids()
         {
             for (var i = 0; i < _app.Count; i++)
             {
-                yield return GenerateGuid();
+                yield return GetGuid();
             }
         }
 
-        private string GenerateGuid()
+        private string GetGuid()
         {
             var guid = _guidFactory();
 
-            var result = guid.ToString(_format);
+            var formattedGuid = GetFormattedGuid(guid);
 
-            result = _app.UpperCase ? result.ToUpperInvariant() : result;
+            var modifiedGuid = GetModifiedGuid(formattedGuid);
 
-            return result;
+            return modifiedGuid;
+        }
+
+        private string GetFormattedGuid(Guid guid)
+        {
+            return _guidFormatter.GetResult(guid);
+        }
+
+        private string GetModifiedGuid(string formattedGuid)
+        {
+            var modifiedGuid = formattedGuid;
+
+            if (_guidFormatter.CanBeCased && _app.LowerCase)
+            {
+                modifiedGuid = modifiedGuid.ToLowerInvariant();
+            }
+            if (_guidFormatter.CanBeCased && _app.UpperCase)
+            {
+                modifiedGuid = modifiedGuid.ToUpperInvariant();
+            }
+
+            return modifiedGuid;
         }
     }
 }

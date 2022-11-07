@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DotnetGuid
+﻿namespace DotnetGuid
 {
     internal static class DescriptionTexts
     {
@@ -8,7 +6,13 @@ namespace DotnetGuid
 
         public const string Empty = "Defines if the GUIDs/UUIDs should be empty, using zero-values only.";
 
+        public const string LowerCase = "Defines if the GUIDs/UUIDs generated should be lower-cased letters.";
+
         public const string UpperCase = "Defines if the GUIDs/UUIDs generated should be upper-cased letters.";
+
+        public const string FormatBase64 = "Formatted as Base64 string, with trimmed trailing equal signs:\r\nABCDEfghij12345abcdefg";
+
+        public const string FormatBase64Full = "Formatted as full Base64 string:\r\nABCDEfghij12345abcdefg==";
 
         public const string Format32Digits = "Formatted as 32 digits:\r\n00000000000000000000000000000000";
 

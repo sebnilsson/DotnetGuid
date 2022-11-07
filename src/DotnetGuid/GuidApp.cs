@@ -12,23 +12,32 @@ namespace DotnetGuid
         [Argument(order: 0, Description = DescriptionTexts.Count)]
         public int Count { get; set; } = 1;
 
-        [Option("-n", CommandOptionType.NoValue, Description = DescriptionTexts.Format32Digits)]
+        [Option("-fb64", CommandOptionType.NoValue, Description = DescriptionTexts.FormatBase64)]
+        public bool FormatBase64 { get; set; }
+
+        [Option("-fb64f", CommandOptionType.NoValue, Description = DescriptionTexts.FormatBase64Full)]
+        public bool FormatBase64Trimmed { get; set; }
+
+        [Option("-fn", CommandOptionType.NoValue, Description = DescriptionTexts.Format32Digits)]
         public bool Format32Digits { get; set; }
 
-        [Option("-d", CommandOptionType.NoValue, Description = DescriptionTexts.Format32DigitsHyphens)]
+        [Option("-fh", CommandOptionType.NoValue, Description = DescriptionTexts.Format32DigitsHyphens)]
         public bool Format32DigitsHyphens { get; set; }
 
-        [Option("-b", CommandOptionType.NoValue, Description = DescriptionTexts.Format32DigitsHyphensBraces)]
+        [Option("-fhb", CommandOptionType.NoValue, Description = DescriptionTexts.Format32DigitsHyphensBraces)]
         public bool Format32DigitsHyphensBraces { get; set; }
 
-        [Option("-p", CommandOptionType.NoValue, Description = DescriptionTexts.Format32DigitsHyphensParentheses)]
+        [Option("-fhp", CommandOptionType.NoValue, Description = DescriptionTexts.Format32DigitsHyphensParentheses)]
         public bool Format32DigitsHyphensParentheses { get; set; }
 
-        [Option("-x", CommandOptionType.NoValue, Description = DescriptionTexts.FormatHexadecimal)]
+        [Option("-fx", CommandOptionType.NoValue, Description = DescriptionTexts.FormatHexadecimal)]
         public bool FormatHexadecimal { get; set; }
 
         [Option("-e", CommandOptionType.NoValue, Description = DescriptionTexts.Empty)]
         public bool Empty { get; set; }
+
+        [Option("-l", CommandOptionType.NoValue, Description = DescriptionTexts.LowerCase)]
+        public bool LowerCase { get; set; }
 
         [Option("-u", CommandOptionType.NoValue, Description = DescriptionTexts.UpperCase)]
         public bool UpperCase { get; set; }
