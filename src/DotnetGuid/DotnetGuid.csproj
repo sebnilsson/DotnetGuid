@@ -23,8 +23,8 @@
     <RepositoryType>git</RepositoryType>
 
     <Authors>Sebastian Nilsson</Authors>
-    <Description>.NET Core Global Tool for creating GUIDs/UUIDs</Description>
-    <Summary>.NET Core Global Tool for creating GUIDs/UUIDs</Summary>
+    <Description>.NET Tool for creating GUIDs/UUIDs</Description>
+    <Summary>.NET Tool for creating GUIDs/UUIDs</Summary>
   </PropertyGroup>
 
   <PropertyGroup>
