@@ -4,20 +4,20 @@ namespace DotnetGuid
 {
     internal static class GuidFormatterResolver
     {
-        public static GuidFormatter GetFormatter(GuidApp app)
+        public static GuidFormatter GetFormatter(GuidCommand.Settings settings)
         {
-            if (app == null)
-                throw new ArgumentNullException(nameof(app));
+            if (settings == null)
+                throw new ArgumentNullException(nameof(settings));
 
-            return app switch
+            return settings switch
             {
-                { FormatBase64: true } => GuidFormatter.CreateForBase64(trim: false),
-                { FormatBase64Trimmed: true } => GuidFormatter.CreateForBase64(trim: true),
-                { Format32Digits: true } => GuidFormatter.CreateForToString("N"),
-                { Format32DigitsHyphens: true } => GuidFormatter.CreateForToString("D"),
-                { Format32DigitsHyphensBraces: true } => GuidFormatter.CreateForToString("B"),
-                { Format32DigitsHyphensParentheses: true } => GuidFormatter.CreateForToString("P"),
-                { FormatHexadecimal: true } => GuidFormatter.CreateForToString("X"),
+                { Format: GuidCommand.Settings.GuidFormat.B64 } => GuidFormatter.CreateForBase64(trim: true),
+                { Format: GuidCommand.Settings.GuidFormat.B64F } => GuidFormatter.CreateForBase64(trim: false),
+                { Format: GuidCommand.Settings.GuidFormat.N } => GuidFormatter.CreateForToString("N"),
+                { Format: GuidCommand.Settings.GuidFormat.H } => GuidFormatter.CreateForToString("D"),
+                { Format: GuidCommand.Settings.GuidFormat.HB } => GuidFormatter.CreateForToString("B"),
+                { Format: GuidCommand.Settings.GuidFormat.HP } => GuidFormatter.CreateForToString("P"),
+                { Format: GuidCommand.Settings.GuidFormat.X } => GuidFormatter.CreateForToString("X"),
                 _ => GuidFormatter.CreateDefault()
             };
         }

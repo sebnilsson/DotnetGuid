@@ -1,6 +1,5 @@
 ﻿using System;
-
-using McMaster.Extensions.CommandLineUtils;
+using Spectre.Console.Cli;
 
 namespace DotnetGuid
 {
@@ -10,7 +9,20 @@ namespace DotnetGuid
         {
             Console.CancelKeyPress += OnCancelKeyPress;
 
-            return CommandLineApplication.Execute<GuidApp>(args);
+            var app = new CommandApp<GuidCommand>();
+            app.Configure(config =>
+            {
+                config.SetApplicationName("dotnet-guid");
+
+                config.AddExample(new[] { "5", "-f", "N" });
+                config.AddExample(new[] { "-f", "X", "-u" });
+                config.AddExample(new[] { "-f", "B64" });
+                config.AddExample(new[] { "-e" });
+
+                config.ValidateExamples();
+            });
+
+            return app.Run(args);
         }
 
         private static void OnCancelKeyPress(
