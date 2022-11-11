@@ -23,6 +23,7 @@ namespace DotnetGuid
 
             return 0;
         }
+
         private static void OnEnd()
         {
             if (Debugger.IsAttached)

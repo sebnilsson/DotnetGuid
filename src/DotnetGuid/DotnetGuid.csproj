@@ -27,10 +27,6 @@
     <Summary>.NET tool for creating GUIDs/UUIDs</Summary>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Spectre.Console.Cli" Version="0.45.0" />
   </ItemGroup>
