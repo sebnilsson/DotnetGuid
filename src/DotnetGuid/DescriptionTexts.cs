@@ -10,6 +10,8 @@
 
         public const string UpperCase = "Sets GUIDs/UUIDs to use upper-cased letters, where applicable.";
 
+        public const string Copy = "Copies generated GUIDs/UUIDs to clipboard.";
+
         public const string Format =
             $"Sets the formatting of generated GUIDs/UUIDs\r\n"
             + $"- {nameof(GuidCommand.Settings.GuidFormat.B64)}: Base64 string (ABCDEfghij12345abcdefg)\r\n"

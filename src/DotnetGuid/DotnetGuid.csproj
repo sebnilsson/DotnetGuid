@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <PackageReference Include="Spectre.Console.Cli" Version="0.45.0" />
+    <PackageReference Include="TextCopy" Version="6.*" />
   </ItemGroup>
 
 </Project>
