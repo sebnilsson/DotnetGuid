@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Text;
 using Spectre.Console.Cli;
 
 namespace DotnetGuid
@@ -14,9 +15,22 @@ namespace DotnetGuid
         {
             var guidGenerator = new GuidGenerator(settings);
 
+            var sb = new StringBuilder();
+
             foreach (var guid in guidGenerator.GenerateGuids())
             {
                 Console.WriteLine(guid);
+
+                if (settings.CopyToClipboard)
+                {
+                    sb.AppendLine(guid);
+                }
+            }
+
+            if (settings.CopyToClipboard)
+            {
+                var guids = sb.ToString().TrimEnd();
+                TextCopy.ClipboardService.SetText(guids);
             }
 
             OnEnd();
@@ -54,6 +68,10 @@ namespace DotnetGuid
             [Description(DescriptionTexts.UpperCase)]
             [CommandOption("-u|--uppercase")]
             public bool UpperCase { get; init; }
+
+            [Description(DescriptionTexts.Copy)]
+            [CommandOption("-c|--copy")]
+            public bool CopyToClipboard { get; init; }
 
             [Description(DescriptionTexts.Format)]
             [CommandOption("-f|--format")]
