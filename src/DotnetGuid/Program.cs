@@ -1,35 +1,45 @@
-﻿using System;
+﻿using Spectre.Console;
 using Spectre.Console.Cli;
 
-namespace DotnetGuid
+namespace DotnetGuid;
+
+public class Program
 {
-    public class Program
+    public static int Main(string[] args)
     {
-        public static int Main(string[] args)
+        Console.CancelKeyPress += OnCancelKeyPress;
+
+        var app = new CommandApp<GuidCommand>();
+        app.Configure(config =>
         {
-            Console.CancelKeyPress += OnCancelKeyPress;
+            config.SetApplicationName("dotnet-guid");
 
-            var app = new CommandApp<GuidCommand>();
-            app.Configure(config =>
-            {
-                config.SetApplicationName("dotnet-guid");
+            config.AddExample(["5", "-f", "N"]);
+            config.AddExample(["-f", "X", "-u"]);
+            config.AddExample(["-f", "B64"]);
+            config.AddExample(["-e"]);
 
-                config.AddExample(new[] { "5", "-f", "N" });
-                config.AddExample(new[] { "-f", "X", "-u" });
-                config.AddExample(new[] { "-f", "B64" });
-                config.AddExample(new[] { "-e" });
+#if DEBUG
+            config.PropagateExceptions();
+            config.ValidateExamples();
+#endif
+        });
 
-                config.ValidateExamples();
-            });
-
+        try
+        {
             return app.Run(args);
         }
-
-        private static void OnCancelKeyPress(
-            object? sender,
-            ConsoleCancelEventArgs e)
+        catch (Exception ex)
         {
-            Console.ResetColor();
+            AnsiConsole.WriteException(ex, ExceptionFormats.ShortenEverything);
+            return -99;
         }
+    }
+
+    private static void OnCancelKeyPress(
+        object? sender,
+        ConsoleCancelEventArgs e)
+    {
+        Console.ResetColor();
     }
 }
