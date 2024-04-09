@@ -19,13 +19,13 @@ dotnet tool install -g dotnet-guid
 
 ```
 USAGE:
-    dotnet-guid [count] [OPTIONS]
+    dotnet guid [count] [OPTIONS]
 
 EXAMPLES:
-    dotnet-guid 5 -f N
-    dotnet-guid -f X -u
-    dotnet-guid -f B64
-    dotnet-guid -e
+    dotnet guid 5 -f N
+    dotnet guid -f X -u
+    dotnet guid -f B64
+    dotnet guid -e
 
 ARGUMENTS:
     [count]    Number of GUIDs/UUIDs to generate. Defaults to 1
@@ -52,11 +52,11 @@ OPTIONS:
 To get a single GUID/UUID, simply type:
 
 ```
-dotnet-guid
+dotnet guid
 ```
 
 To get 3 random GUIDs/UUIDs, with letters in upper-case, formatted with brackets:
 
 ```
-dotnet-guid 3 -f H -u
+dotnet guid 3 -f H -u
 ```
