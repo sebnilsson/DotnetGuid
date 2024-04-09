@@ -2,17 +2,17 @@
 
   <PropertyGroup>
     <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
-    <IsPackable>true</IsPackable>    
+    <IsPackable>true</IsPackable>
     <OutputType>Exe</OutputType>
-    
+
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 
     <AssemblyName>dotnet-guid</AssemblyName>
     <PackageId>dotnet-guid</PackageId>
-    <PackageVersion>1.0.2</PackageVersion>
-    <Version>1.0.2</Version>
+    <PackageVersion>1.0.3</PackageVersion>
+    <Version>1.0.3</Version>
 
     <ToolCommandName>dotnet-guid</ToolCommandName>
     <PackAsTool>True</PackAsTool>
@@ -30,7 +30,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Spectre.Console.Cli" Version="0.45.0" />
+    <PackageReference Include="Spectre.Console.Cli" Version="0.48.0" />
   </ItemGroup>
 
 </Project>
