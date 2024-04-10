@@ -27,7 +27,16 @@
     <Authors>Sebastian Nilsson</Authors>
     <Description>.NET tool for creating GUIDs/UUIDs</Description>
     <Summary>.NET tool for creating GUIDs/UUIDs</Summary>
+    
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md">
+      <Pack>True</Pack>
+      <PackagePath>/</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Spectre.Console.Cli" Version="0.48.0" />
