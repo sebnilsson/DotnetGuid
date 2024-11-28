@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: publish
+name: Publish to NuGet
 on:
   workflow_dispatch: # Allow running the workflow manually from the GitHub UI
   push:
@@ -17,56 +17,27 @@ defaults:
     shell: pwsh
 
 jobs:
-  create_nuget:
+  publish:
     runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0 # Get all history to allow automatic versioning using MinVer
 
-    # Install the .NET SDK indicated in the global.json file
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
 
-    # Create the NuGet package in the folder from the environment variable NuGetDirectory
-    - run: dotnet pack --configuration Release --output ${{ env.NuGetDirectory }}
+    - name: .NET Restore
+      run: dotnet restore
 
-    # Publish the NuGet package as an artifact, so they can be used in the following jobs
-    - uses: actions/upload-artifact@v3
-      with:
-        name: nuget
-        if-no-files-found: error
-        retention-days: 7
-        path: ${{ env.NuGetDirectory }}/*.nupkg
+    - name: .NET Build
+      run: dotnet build --no-restore --configuration Release
 
-  run_test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-    - name: Run tests
-      run: dotnet test --configuration Release
+    - name: .NET Test
+      run: dotnet test --no-restore
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [ create_nuget, run_test ]
-    steps:
-      # Download the NuGet package created in the previous job
-      - uses: actions/download-artifact@v4.1.7
-        with:
-          name: nuget
-          path: ${{ env.NuGetDirectory }}
+    - name: .NET Pack
+      run: dotnet pack --no-restore --configuration Release --output ${{ env.NuGetDirectory }}
 
-      # Install the .NET SDK indicated in the global.json file
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v4
-
-      # Publish all NuGet packages to NuGet.org
-      # Use --skip-duplicate to prevent errors if a package with the same version already exists.
-      # If you retry a failed workflow, already published packages will be skipped without error.
-      - name: Publish NuGet package
-        run: |
-          foreach($file in (Get-ChildItem "${{ env.NuGetDirectory }}" -Recurse -Include *.nupkg)) {
-              dotnet nuget push $file --api-key "${{ secrets.NUGET_APIKEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
-          }
+    - name: NuGet Push
+      run: dotnet nuget push ${{ env.NuGetDirectory }}/*.nupkg  --api-key ${{ secrets.NUGET_APIKEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
