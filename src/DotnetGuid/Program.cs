@@ -18,6 +18,7 @@ public class Program
             config.AddExample(["-f", "X", "-u"]);
             config.AddExample(["-f", "B64"]);
             config.AddExample(["-e"]);
+            config.AddExample(["--v7"]);
 
 #if DEBUG
             config.PropagateExceptions();

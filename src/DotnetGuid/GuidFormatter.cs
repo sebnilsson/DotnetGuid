@@ -1,20 +1,12 @@
 ﻿namespace DotnetGuid;
 
-internal class GuidFormatter
+internal class GuidFormatter(Func<Guid, string> factory, bool canBeCased = true)
 {
-    private readonly Func<Guid, string> _factory;
-
-    public GuidFormatter(Func<Guid, string> factory, bool canBeCased = true)
-    {
-        _factory = factory;
-        CanBeCased = canBeCased;
-    }
-
-    public bool CanBeCased { get; }
+    public bool CanBeCased { get; } = canBeCased;
 
     public string GetResult(Guid guid)
     {
-        return _factory(guid);
+        return factory(guid);
     }
 
     public static GuidFormatter CreateForBase64(bool trim)
