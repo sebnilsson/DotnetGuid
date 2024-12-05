@@ -26,7 +26,7 @@ EXAMPLES:
     dotnet guid -f X -u
     dotnet guid -f B64
     dotnet guid -e
-    dotbet guid --v7
+    dotnet guid --v7
 
 ARGUMENTS:
     [count]    Number of GUIDs/UUIDs to generate. Defaults to 1
