@@ -8,7 +8,8 @@ public class GuidCommand : Command<GuidCommandSettings>
 {
     public override int Execute(
         [NotNull] CommandContext context,
-        [NotNull] GuidCommandSettings settings)
+        [NotNull] GuidCommandSettings settings,
+        CancellationToken cancellationToken)
     {
         var guidGenerator = new GuidGenerator(settings);
 
