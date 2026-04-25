@@ -11,6 +11,8 @@ public class GuidCommand : Command<GuidCommandSettings>
         [NotNull] GuidCommandSettings settings,
         CancellationToken cancellationToken)
     {
+        using var activity = new System.Diagnostics.ActivitySource("DotnetGuid").StartActivity("GenerateGuids");
+
         var guidGenerator = new GuidGenerator(settings);
 
         foreach (var guid in guidGenerator.GenerateGuids())
