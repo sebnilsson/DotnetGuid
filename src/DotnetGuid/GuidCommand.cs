@@ -6,7 +6,7 @@ namespace DotnetGuid;
 
 public class GuidCommand : Command<GuidCommandSettings>
 {
-    public override int Execute(
+    protected override int Execute(
         [NotNull] CommandContext context,
         [NotNull] GuidCommandSettings settings,
         CancellationToken cancellationToken)

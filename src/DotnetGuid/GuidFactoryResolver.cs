@@ -19,7 +19,7 @@ namespace DotnetGuid
 
             if (!string.IsNullOrWhiteSpace(settings.Parse))
             {
-                return () => Guid.TryParse(settings.Parse, out var guid) ? guid : s_emptyGuidFactory();
+                return () => Guid.Parse(settings.Parse);
             }
 
 #if NET9_0_OR_GREATER

@@ -13,9 +13,9 @@ internal static class DescriptionTexts
     public const string UpperCase = "Sets GUIDs/UUIDs to use upper-cased letters, where applicable.";
 
 #if NET9_0_OR_GREATER
-    public const string Version7 = "Uses version 7 of GUID/UUID. Only in .NET 9 and newer.";
+    public const string Version7 = "Uses version 7 of GUID/UUID.";
 
-    public const string Version7Timestamp = "Seeds the version 7 of the GUID/UUID generated with a timestamp. Only in .NET 9 and newer.";
+    public const string Version7Timestamp = "Seeds the version 7 of the GUID/UUID generated with a timestamp.";
 #endif
 
     public const string Format =

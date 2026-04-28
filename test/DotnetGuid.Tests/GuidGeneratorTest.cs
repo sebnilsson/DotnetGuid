@@ -62,6 +62,68 @@ public class GuidGeneratorTest
     }
 
     [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    public void Validate_WithInvalidCount_ReturnsError(int count)
+    {
+        // Arrange
+        var settings = new GuidCommandSettings { Count = count };
+
+        // Act
+        var result = settings.Validate();
+
+        // Assert
+        Assert.False(result.Successful);
+        Assert.Equal("Count must be greater than zero.", result.Message);
+    }
+
+    [Fact]
+    public void Validate_WithInvalidParse_ReturnsError()
+    {
+        // Arrange
+        var settings = new GuidCommandSettings { Parse = "not-a-guid" };
+
+        // Act
+        var result = settings.Validate();
+
+        // Assert
+        Assert.False(result.Successful);
+        Assert.Equal("Parse must be a valid GUID/UUID string.", result.Message);
+    }
+
+    [Fact]
+    public void Validate_WithUpperCaseAndLowerCase_ReturnsError()
+    {
+        // Arrange
+        var settings = new GuidCommandSettings { LowerCase = true, UpperCase = true };
+
+        // Act
+        var result = settings.Validate();
+
+        // Assert
+        Assert.False(result.Successful);
+        Assert.Equal("Lowercase and uppercase cannot be used together.", result.Message);
+    }
+
+    [Fact]
+    public void Validate_WithEmptyAndParse_ReturnsError()
+    {
+        // Arrange
+        var settings = new GuidCommandSettings { Empty = true, Parse = s_sampleGuid };
+
+        // Act
+        var result = settings.Validate();
+
+        // Assert
+        Assert.False(result.Successful);
+#if NET9_0_OR_GREATER
+        Assert.Equal("Use only one GUID source option: empty, parse, or v7.", result.Message);
+#else
+        Assert.Equal("Use only one GUID source option: empty or parse.", result.Message);
+#endif
+    }
+
+    [Theory]
     [InlineData(GuidCommandSettings.GuidFormat.B64, "eFY0Es2rNBKrzRI0VniQEg")]
     [InlineData(GuidCommandSettings.GuidFormat.B64F, "eFY0Es2rNBKrzRI0VniQEg==")]
     [InlineData(GuidCommandSettings.GuidFormat.N, "12345678abcd1234abcd123456789012")]
@@ -96,6 +158,34 @@ public class GuidGeneratorTest
 
         // Assert
         Assert.Equal(7, guid.Version);
+    }
+
+    [Fact]
+    public void Validate_WithVersion7TimestampWithoutVersion7_ReturnsError()
+    {
+        // Arrange
+        var settings = new GuidCommandSettings { Version7Timestamp = "2024-01-01T00:00:00Z" };
+
+        // Act
+        var result = settings.Validate();
+
+        // Assert
+        Assert.False(result.Successful);
+        Assert.Equal("The v7 timestamp option requires v7.", result.Message);
+    }
+
+    [Fact]
+    public void Validate_WithInvalidVersion7Timestamp_ReturnsError()
+    {
+        // Arrange
+        var settings = new GuidCommandSettings { Version7 = true, Version7Timestamp = "not-a-timestamp" };
+
+        // Act
+        var result = settings.Validate();
+
+        // Assert
+        Assert.False(result.Successful);
+        Assert.Equal("The v7 timestamp must be a valid timestamp.", result.Message);
     }
 #endif
 }

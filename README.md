@@ -37,8 +37,8 @@ OPTIONS:
     -l, --lowercase       Sets GUIDs/UUIDs to use lower-cased letters, where applicable
     -p, --parse           Provides a GUID/UUID string to be used and showed
     -u, --uppercase       Sets GUIDs/UUIDs to use upper-cased letters, where applicable
-        --v7              Uses version 7 of GUID/UUID. Only in .NET 9 and newer
-        --v7-timestamp    Seeds the version 7 of the GUID/UUID generated with a timestamp. Only in .NET 9 and newer
+        --v7              Uses version 7 of GUID/UUID
+        --v7-timestamp    Seeds the version 7 of the GUID/UUID generated with a timestamp
     -f, --format          Sets the output formatting of generated GUIDs/UUIDs
                           - B64: Base64 string "ABCDEfghij12345abcdefg"
                           - B64F: Base64 full string "ABCDEfghij12345abcdefg=="
