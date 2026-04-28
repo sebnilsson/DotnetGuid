@@ -1,0 +1,25 @@
+<Solution>
+  <Folder Name="/GitHub/">
+    <File Path=".github/workflows/ci.yml" />
+    <File Path=".github/workflows/publish.yml" />
+  </Folder>
+  <Folder Name="/GitHub/dotnet-build-test/">
+    <File Path=".github/actions/dotnet-build-test/action.yml" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="AGENTS.md" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/DotnetGuid/DotnetGuid.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <File Path="test/Directory.Packages.props" />
+    <Project Path="test/DotnetGuid.Tests/DotnetGuid.Tests.csproj" />
+  </Folder>
+</Solution>

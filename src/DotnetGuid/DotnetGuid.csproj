@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net9.0;net10.0</TargetFrameworks>
@@ -12,8 +12,6 @@
     <Title>Dotnet Guid</Title>
     <AssemblyName>dotnet-guid</AssemblyName>
     <PackageId>dotnet-guid</PackageId>
-    <PackageVersion>$(Version)</PackageVersion>
-    <Version>1.2.0</Version>
 
     <ToolCommandName>dotnet-guid</ToolCommandName>
     <PackAsTool>True</PackAsTool>
@@ -40,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Spectre.Console.Cli" Version="0.55.0" />
+    <PackageReference Include="Spectre.Console.Cli" />
   </ItemGroup>
 
 </Project>
