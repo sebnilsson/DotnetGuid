@@ -1,6 +1,4 @@
-﻿#if NET9_0_OR_GREATER
-using System.Globalization;
-#endif
+﻿using System.Globalization;
 
 namespace DotnetGuid
 {
@@ -22,7 +20,6 @@ namespace DotnetGuid
                 return () => Guid.Parse(settings.Parse);
             }
 
-#if NET9_0_OR_GREATER
             if (settings.Version7)
             {
                 var timestamp = TryParseTimestamp(settings.Version7Timestamp);
@@ -31,12 +28,10 @@ namespace DotnetGuid
                     ? () => Guid.CreateVersion7(timestamp.Value)
                     : () => Guid.CreateVersion7();
             }
-#endif
 
             return s_newGuidFactory;
         }
 
-#if NET9_0_OR_GREATER
         private static DateTimeOffset? TryParseTimestamp(string timestamp)
         {
             if (string.IsNullOrWhiteSpace(timestamp))
@@ -48,6 +43,5 @@ namespace DotnetGuid
                 ? result
                 : null;
         }
-#endif
     }
 }

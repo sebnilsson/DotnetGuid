@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel;
-#if NET9_0_OR_GREATER
 using System.Globalization;
-#endif
 using Spectre.Console;
 using Spectre.Console.Cli;
 
@@ -30,7 +28,6 @@ public class GuidCommandSettings : CommandSettings
     [CommandOption("-u|--uppercase")]
     public bool UpperCase { get; init; }
 
-#if NET9_0_OR_GREATER
     [Description(DescriptionTexts.Version7)]
     [CommandOption("--v7")]
     public bool Version7 { get; init; }
@@ -38,7 +35,6 @@ public class GuidCommandSettings : CommandSettings
     [Description(DescriptionTexts.Version7Timestamp)]
     [CommandOption("--v7-timestamp")]
     public string Version7Timestamp { get; init; } = string.Empty;
-#endif
 
     [Description(DescriptionTexts.Format)]
     [CommandOption("-f|--format")]
@@ -61,7 +57,6 @@ public class GuidCommandSettings : CommandSettings
             return ValidationResult.Error("Parse must be a valid GUID/UUID string.");
         }
 
-#if NET9_0_OR_GREATER
         if (HasMultipleGuidSources())
         {
             return ValidationResult.Error("Use only one GUID source option: empty, parse, or v7.");
@@ -77,17 +72,10 @@ public class GuidCommandSettings : CommandSettings
         {
             return ValidationResult.Error("The v7 timestamp must be a valid timestamp.");
         }
-#else
-        if (Empty && !string.IsNullOrWhiteSpace(Parse))
-        {
-            return ValidationResult.Error("Use only one GUID source option: empty or parse.");
-        }
-#endif
 
         return ValidationResult.Success();
     }
 
-#if NET9_0_OR_GREATER
     private bool HasMultipleGuidSources()
     {
         var sourceCount = 0;
@@ -109,7 +97,6 @@ public class GuidCommandSettings : CommandSettings
 
         return sourceCount > 1;
     }
-#endif
 
     public enum GuidFormat
     {

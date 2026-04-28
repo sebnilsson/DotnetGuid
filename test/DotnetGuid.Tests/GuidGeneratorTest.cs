@@ -116,11 +116,7 @@ public class GuidGeneratorTest
 
         // Assert
         Assert.False(result.Successful);
-#if NET9_0_OR_GREATER
         Assert.Equal("Use only one GUID source option: empty, parse, or v7.", result.Message);
-#else
-        Assert.Equal("Use only one GUID source option: empty or parse.", result.Message);
-#endif
     }
 
     [Theory]
@@ -144,7 +140,6 @@ public class GuidGeneratorTest
         Assert.Equal(expect, guid);
     }
 
-#if NET9_0_OR_GREATER
     [Fact]
     public void GenerateGuids_WithVersion7_ReturnsVersion7Guid()
     {
@@ -187,5 +182,4 @@ public class GuidGeneratorTest
         Assert.False(result.Successful);
         Assert.Equal("The v7 timestamp must be a valid timestamp.", result.Message);
     }
-#endif
 }
