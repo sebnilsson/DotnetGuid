@@ -7,6 +7,16 @@ public class Program
 {
     public static int Main(string[] args)
     {
+        // Initialize OpenTelemetry as early as possible
+        try
+        {
+            Instrumentation.RegisterOpenTelemetry();
+        }
+        catch (Exception ex)
+        {
+            // Do not fail startup if telemetry fails
+            Console.WriteLine($"Telemetry initialization failed: {ex.Message}");
+        }
         Console.CancelKeyPress += OnCancelKeyPress;
 
         var app = new CommandApp<GuidCommand>();
